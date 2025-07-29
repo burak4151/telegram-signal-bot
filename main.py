@@ -1,12 +1,17 @@
+from telegram.ext import ApplicationBuilder, CommandHandler
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from telegram.ext import ContextTypes
+
+import os
+
+TOKEN = os.environ.get("8455466930:AAED97pwYbBvuBzUkd1oyYQYk7-ZA_yIT28")  # Environment'ten al
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_message:
-        await update.effective_message.reply_text("✅ Bot aktif! Sinyal sistemi hazır 🚀")
+    await update.message.reply_text("🟢 Bot aktif!")
 
-if __name__ == '__main__':
-    app = ApplicationBuilder().token("8455466930:AAED97pwYbBvuBzUkd1oyYQYk7-ZA_yIT28").build()
-    app.add_handler(CommandHandler("start", start))
-    print("🚀 Bot başlatıldı. Telegram üzerinden /start yazarak test edebilirsin.")
-    app.run_polling()
+app = ApplicationBuilder().token(TOKEN).build()
+app.add_handler(CommandHandler("start", start))
+
+app.run_polling()
+
+
